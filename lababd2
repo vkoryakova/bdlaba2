@@ -1,0 +1,104 @@
+USE [pizza]
+GO
+/****** Object:  Table [dbo].[Адрес доставки]    Script Date: 15.06.2023 9:46:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Адрес доставки](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[улица] [nvarchar](50) NULL,
+	[дом] [nvarchar](50) NULL,
+	[квартира/офис] [int] NULL,
+	[id_клиента] [int] NULL,
+ CONSTRAINT [PK_Адрес доставки] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Заказ]    Script Date: 15.06.2023 9:46:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Заказ](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[дата и время заказа] [datetime] NULL,
+	[статус] [nvarchar](50) NULL,
+	[id_адрес доставки] [int] NULL,
+  [id_клиента] [int] NULL,
+  [id_пиццы] [int] NULL,
+	[стоимость] [money] NULL,
+ CONSTRAINT [PK_Заказ] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Клиент]    Script Date: 15.06.2023 9:46:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Клиент](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[контактные данные] [int] NULL,
+	[ФИО] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Клиент] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Курьер]    Script Date: 15.06.2023 9:46:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Курьер](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[id_заказа] [int] NULL,
+	[ФИО] [nvarchar](50) NULL,
+	[статус] [nvarchar](50) NULL,
+	[контактные данные] [int] NULL,
+ CONSTRAINT [PK_Курьер] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[пицца]    Script Date: 15.06.2023 9:46:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[пицца](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[название] [nvarchar](50) NULL,
+	[набор продуктов] [nvarchar](50) NULL,
+	[кол-во продуктов] [int] NULL,
+	[цена] [money] NULL,
+ CONSTRAINT [PK_пицца] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Сеть]    Script Date: 15.06.2023 9:46:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Сеть](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[название] [nvarchar](50) NULL,
+	[контактные данные] [int] NULL,
+	[id_пиццы(меню)] [int] NULL,
+	[id_курьера] [int] NULL,
+ CONSTRAINT [PK_Сеть] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
